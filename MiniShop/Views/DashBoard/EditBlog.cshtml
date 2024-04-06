@@ -1,0 +1,80 @@
+﻿@model BlogViewModel
+
+@{
+    Layout = "_DashBoard";
+}
+
+
+<div class="dash-content">
+    <div class="overview">
+        <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">Editing Blog</span>
+        </div>
+
+        <div>
+            <form method="post" asp-action="EditBlog" class="row">
+                <div class="mb-3">
+                    <label asp-for="blog.Name" for="" class="form-label">Blog Title</label>
+                    <input type="text"
+                           asp-for="blog.Name"
+                           value="@Model.blog.Name"
+                           class="form-control"
+                           placeholder="" />
+
+                </div>
+                <input type="number" asp-for="blog.Id" hidden />
+                <div class="mb-3">
+                    <label asp-for="blog.Description" for="" class="form-label">Blog Description</label>
+                    <textarea type="text"
+                              asp-for="blog.Description"
+                              class="form-control"
+                              placeholder="">@Model.blog.Description</textarea>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="blog.AuthorName" for="" class="form-label">AuthorName</label>
+                    <textarea type="text"
+                              asp-for="blog.AuthorName"
+                              class="form-control"
+                              placeholder="">@Model.blog.AuthorName</textarea>
+                </div>
+               
+
+                <div class="mb-3 col-lg-6">
+                    <label asp-for="blog.BlogTypeId" for="" class="form-label">BlogType</label>
+                    <select class="form-select "
+                            asp-for="blog.BlogTypeId">
+                        @{
+                            foreach (var type in Model.types)
+                            {
+                                int typeId = Model.blog.BlogTypeId;
+                                if (typeId == type.Id)
+                                {
+                                    <option value=@type.Id selected>@type.Name</option>
+                                }
+                                else
+                                {
+                                    <option value=@type.Id>@type.Name</option>
+                                }
+
+                            }
+                        }
+
+
+
+                        
+                    </select>
+                </div>
+
+
+
+                <div class="col-lg-12 d-flex justify-content-center  ">
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
